@@ -115,7 +115,7 @@ function filter() {
                               
                              </tr>`
                 document.getElementById("stockStore").innerHTML += result
-        
+            //  shoesElem.innerHTML += result
     }
     console.log(filteredShoes);
     
