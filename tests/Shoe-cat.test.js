@@ -1,5 +1,5 @@
 
-describe("shoe catalogue", function () {
+describe("adding stock to the list", function () {
   
     it("should add 1 shoe to the stock", function () {
         var shoeCatInstance = factoryShoeCat();
@@ -47,5 +47,57 @@ const shoeList = shoeCatInstance.getShoe();
 		assert.equal("Adidas", shoeList[4].brand);
     });
 
-});
+    it("should not add empty input to the stock", function () {
+        var shoeCatInstance = factoryShoeCat();
+        shoeCatInstance.addShoe(" ");
+        
 
+        assert.deepEqual(0, shoeCatInstance.getShoe().length)   
+
+    })
+
+  
+    it("should return the filtered Adidas shoe", function () { 
+
+      var shoeCatInstance = factoryShoeCat(stock);
+        
+        shoeCatInstance.addShoe()
+   
+        const param = {
+            brand: "Adidas",
+            color: "red",
+            size: 3,
+           
+        };
+ 
+        
+        const filteredShoes = shoeCatInstance.filterOnSearch(param);
+        console.log(filteredShoes)
+        assert.equal(2, filteredShoes.length);
+    
+
+    })
+
+
+    it("should return the filtered Nike shoe", function () { 
+
+        var shoeCatInstance = factoryShoeCat(stock);
+          
+          shoeCatInstance.addShoe()
+     
+          const param = {
+              brand: "Nike",
+              color: "blue",
+              size: 3,
+             
+          };
+   
+          
+          const filteredShoes = shoeCatInstance.filterOnSearch(param);
+          console.log(filteredShoes)
+          assert.equal(1, filteredShoes.length);
+      
+  
+      })
+
+});
