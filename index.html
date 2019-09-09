@@ -157,7 +157,7 @@
       <div class="col"> 
       <div class="col-sm-4">
         <div class="panel panel-danger">
-          <div class="panel-heading">
+          <div class= "toBuy">
             <button type="button" class="glyphicon glyphicon-plus"> Add to cart </button>
           </div>
           <div class="panel-body"><img src="img.jpg" class="img-responsive" style="width:100%" alt="Image"></div>
@@ -168,36 +168,40 @@
             </div>
           
 
-            <div class="dropdownBrand">
-                <select>
-                    <option value="">select brand</option>
-                      <option value="Nike">Nike</option>
-                      <option value="Adidas">Adidas</option>
-                      <option value="Reebok">Reebok</option>
-                      <option value="Puma">Puma</option>
+            <div class="" >
+                <select class="dropdownBrand" >
+                    <script type="text/x-template" class="shoeBrandTemplate"> 
+                      <option class= "dropdownBrand" value=>Brand</option>
+                      {{#each stock}}
+                      <option class= "brand" value="{{brand}}">{{brand}} </option>
+                      {{/each}}
+                    </script>
+                   
                     </select>
             </div>
 
-            <div class="dropdownColor">
-                <select>
-                    <option value="">select size</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                      <option value="5">5</option>
-                      <option value="6">6</option>
-                      <option value="7">7</option>
-                      <option value="8">8</option>
+            <div class="" >
+                <select class="dropdownSize" >
+                    <script type="text/x-template" class="shoeSizeTemplate"> 
+                      <option class= "dropdownSize" value=>Size</option>
+                      {{#each stock}}
+                      <option class= "size" value="{{size}}">{{size}} </option>
+                      {{/each}}
+                    </script>
+                   
                     </select>
             </div>
-            <div class="dropdownSize">
-                <select>
-                    <option value="">select colour</option>
-                      <option value="black">black</option>
-                      <option value="blue">blue</option>
-                      <option value="red">red</option>
-                      <option value="pink">pink</option>
+            <div class="" >
+                <select class="dropdownColor" >
+                    <script type="text/x-template" class="shoeColorTemplate"> 
+                      <option class= "dropdownColor" value=>Color</option>
+                      {{#each stock}}
+                      <option class= "color" value="{{color}}">{{color}} </option>
+                      {{/each}}
+                    </script>
+                   
                     </select>
-              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -220,12 +224,48 @@
     </table>
  
 </div>
+<div class="filteredCart">
 
+</div>
+<script type="text/x-template" class="filterTemplate">
+  <table>
+   
+    
+    <!-- <tr>
+      <th>Size</th>
+
+      <th>Color </th>
+
+      <th> Brand</th>
+      <th> In_stock</th>
+      <th> Price</th>
+    
+    </tr> -->
+{{#each filteredShoe}}
+  <tr>  
+      <td>{{filteredShoe.size}}</td>
+        <td>{{filteredShoe.color}}</td>
+        <td>{{filteredShoe.brand}}</td>
+        <td>{{in_stock}}</td>
+        <td>{{price}}</td>
+      <p> we have {{in_stock}} {{color}} in stock </p>
+  </tr>
+  {{/each}}
+  </table>
+ 
+  </script>
+<div class="counter">
+  0
+</div>
+<div class="error">
+
+</div>
 </body>
 
 </html>
 
 
-<script src="./Shoe_catalogue.js"></script>
+
 <script src="./shoe_cat.js"></script>
+<script src="./Shoe_catalogue.js"></script>
 <script src="./Shoe catalogue_dom.js"></script>

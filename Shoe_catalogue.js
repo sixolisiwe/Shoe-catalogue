@@ -1,6 +1,40 @@
-function factoryShoeCat(storedStock) {
-    var stock = storedStock || []
-    var error = ""
+function factoryShoeCat(stock) {
+    console.log(stock);
+
+    var stock = [ {
+        size: 3,
+        color : 'blue',
+        brand : "Nike",
+        price : 350,
+        in_stock : 5
+    },
+    {
+        size : 4,
+        color : 'black',
+        brand : "Adidas",
+        price : 275,
+        in_stock : 3
+    },
+    
+    {
+        size : 5,
+        color : 'red',
+        brand : "Adidas",
+        price : 275,
+        in_stock : 3
+    }
+    ]
+    
+     
+    var toAddtoCart = []
+    var error = "";
+    size = 0;
+    brand = ""
+    color = ""
+    in_stock = 0
+    price = 0
+    var isValidReg = (/[!@#$%^&*(),.'?":+`?~{}|<>]/gi);
+
 
     function addShoe(size, brand, color, in_stock, price) {
         const shoeStock = {
@@ -9,29 +43,19 @@ function factoryShoeCat(storedStock) {
             color,
             in_stock,
             price,
-            
-            // stockMessage: function() {
-            //     if(qty >0)
-            //     return `we have ${qty} shoe(s)`
-            //     else return "Out of stock"
-            //     }
 
         };
-if(size != " " && brand != " " && color != " " && in_stock != " " && price != " "){
 
-        stock.push(shoeStock)
-        return true;
-        //     stock.forEach(element => {
-        //    return element.stockMessage();
+        if (isValidReg.test(stock) === false) {} else {
+            error = "invalid entry!"
+        }
+        if (size != " " && brand != " " && color != " " && in_stock != " " && price != " ") {
 
-        // });
-        // console.log(stock[0].stockMessage());
-       
-        
-} else{
-    error = "Invalid entry!"
-}
-console.log("stock",stock);
+            stock.push(shoeStock)
+        } else {
+            error = "Invalid entry!"
+        }
+        console.log("stock", stock);
     };
 
 
@@ -40,84 +64,89 @@ console.log("stock",stock);
         return stock;
     }
 
-    console.log(getShoe);
+   // console.log(getShoe);
+
 
     function ErrorMsg() {
         return error;
     }
 
-    function filterOnSearch(filterParams) {
-        const filterColor = filterParams.color;
-        const filterBrand = filterParams.brand;
-         const filterSize = filterParams.size;
+    function addtoCartSet(size, color, brand, price, in_stock) {
+        var inCart = {
+            size,
+            color,
+            brand,
+            price,
+            in_stock
+        }
+        toAddtoCart.push(inCart)
 
-        console.log(filterParams, 'k');
-        
+    }
 
-        const filteredShoes = [];
+    function getCart() {
+        return toAddtoCart
 
-        if (filterColor !== "" && filterBrand !== "" && filterSize) {
-            console.log(filterParams, 'filter');
-            console.log(stock.length);
-            console.log(stock);
-            
-            
-            for (var i = 0; i < stock.length; i++) {
-                const currentShoe = stock[i];
-                // check if the current shape has a color n brand we are looking for
-                if (currentShoe.color === filterColor &&
-                    currentShoe.brand === filterBrand && currentShoe.size === filterSize) {
-                    filteredShoes.push(currentShoe);
+    }
+  //  console.log(toAddtoCart);
+
+    function filteringOnShoes(filterInput) {
+        var filteredShoe = []
+        console.log(stock);
+        for (var i = 0; i < stock.length; i++) {
+            var filtered = stock[i];
+           //  console.log(filtered);
+             
+            if (filtered.color === filterInput.color &&
+                filtered.size === filterInput.size &&
+                filtered.brand === filterInput.brand) {
+                     filteredShoe.push(filterInput);
                 }
-            }
 
-            return filteredShoes;
-            
-        }
-
-        else if (filterColor !== "") {
-			for(var i=0;i<stock.length;i++) {
-				const currentShoe = stock[i];
-				// check if the current shoe has a color we are looking for
-				if ( currentShoe.color === filterColor) {
-					filteredShoes.push(currentShoe);
-				}
             }
-            return filteredShoes
-        }
-        
-         else if (filterBrand !== "") {
-			for(var i=0;i<stock.length;i++) {
-				const currentShoe = stock[i];
-				// check if the current shoe has the brand we are looking for
-				if ( currentShoe.brand === filterBrand ) {
-					filteredShoes.push(currentShoe);
-				}
-            }
-            return filteredShoes;
-		}
+           
+        console.log(filteredShoe)
+              return filteredShoe
+       
+    }
 
-        else if (filterSize !== 0) {
-			for(var i=0;i<stock.length;i++) {
-				const currentShoe = stock[i];
-				// check if the current shoe has the brand we are looking for
-				if ( currentShoe.size === filterSize ) {
-					filteredShoes.push(currentShoe);
-				}
-            }
-            return filteredShoes;
-		}
+  //  console.log(toAddtoCart);
 
-        
+    function selectedColor(ColorInputs, selectedOption) {
+        let isColorSelected = false;
+
+        var selectedInput = ColorInputs.filter(function (option) {
+            if (option.color === selectedOption) {
+                isColorSelected = true
+            }
+        })
+        return isColorSelected
+    }
+
+    function selectedShoe() {
+        let currentOption = {}
+        var selectedShoe = storedStock.filter(function (option) {
+            if (option.color === "red") {
+                currentOption = option;
+            }
+        })
+
+        return currentOption
+    }
+
+    function cartCounter() {
+        return toAddtoCart.length
     }
 
     return {
         addShoe,
         getShoe,
-        filterOnSearch,
-        ErrorMsg
+        // filterOnSearch,
+        ErrorMsg,
+        selectedColor,
+        getCart,
+        cartCounter,
+        addtoCartSet,
+        filteringOnShoes
     }
 
 }
-
-

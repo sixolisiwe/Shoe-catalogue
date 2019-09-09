@@ -1,4 +1,4 @@
-const stock = [ {
+var stock = [ {
     size: 3,
     color : 'blue',
     brand : "Nike",

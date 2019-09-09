@@ -100,4 +100,36 @@ const shoeList = shoeCatInstance.getShoe();
   
       })
 
+      it("should return the filtered Nike shoe", function () { 
+
+        var shoeCatInstance = factoryShoeCat(stock);
+          
+        const list = [ {
+            size: 3,
+            color : 'blue',
+            brand : "Nike",
+            price : 350,
+            in_stock : 5
+        },
+        {
+            size : 4,
+            color : 'black',
+            brand : "Adidas",
+            price : 275,
+            in_stock : 3
+        },
+        
+        {
+            size : 5,
+            color : 'red',
+            brand : "Adidas",
+            price : 275,
+            in_stock : 3
+        },]
+   
+          assert.equal('red', shoeCatInstance.selectedColor(list, "red"));
+      
+  
+      })
+
 });
